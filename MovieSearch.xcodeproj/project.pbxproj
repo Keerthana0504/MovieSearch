@@ -19,6 +19,7 @@
 		92023DBB2156247F00227A80 /* MovieDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92023DBA2156247F00227A80 /* MovieDetailsModel.swift */; };
 		92023DBD2156252C00227A80 /* MovieDataMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92023DBC2156252C00227A80 /* MovieDataMocks.swift */; };
 		92023DBF2156256900227A80 /* MovieModelGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92023DBE2156256900227A80 /* MovieModelGeneratorTests.swift */; };
+		92023DC121562EDD00227A80 /* SearchHistoryTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92023DC021562EDD00227A80 /* SearchHistoryTableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		92023DBA2156247F00227A80 /* MovieDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsModel.swift; sourceTree = "<group>"; };
 		92023DBC2156252C00227A80 /* MovieDataMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDataMocks.swift; sourceTree = "<group>"; };
 		92023DBE2156256900227A80 /* MovieModelGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModelGeneratorTests.swift; sourceTree = "<group>"; };
+		92023DC021562EDD00227A80 /* SearchHistoryTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryTableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				92023DB62156243600227A80 /* MovieDetailCell.swift */,
 				92023DB82156246700227A80 /* MovieStore.swift */,
 				92023DBA2156247F00227A80 /* MovieDetailsModel.swift */,
+				92023DC021562EDD00227A80 /* SearchHistoryTableView.swift */,
 			);
 			path = MovieSearch;
 			sourceTree = "<group>";
@@ -271,6 +274,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92023DC121562EDD00227A80 /* SearchHistoryTableView.swift in Sources */,
 				92023DB92156246700227A80 /* MovieStore.swift in Sources */,
 				92023DBB2156247F00227A80 /* MovieDetailsModel.swift in Sources */,
 				92023D8B21561F8F00227A80 /* ViewController.swift in Sources */,

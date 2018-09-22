@@ -14,7 +14,9 @@ class ViewController: UIViewController {
     var moviesTableView: UITableView!
     let store: Store = MovieStore()
     var movies = [Movies]()
+    let persistSearch = UserDefaults.standard
     var searchText = ""
+    var historyView: SearchHistoryTableView?
     var searchTerms = [String]()
     
     override func viewDidLoad() {
@@ -27,6 +29,9 @@ class ViewController: UIViewController {
         searchController.searchBar.placeholder = "Search for Movies"
         self.searchController.dimsBackgroundDuringPresentation = false
         self.navigationItem.searchController = searchController
+        if let storedSearch = persistSearch.value(forKeyPath: "SearchTerms") as? [String] {
+            searchTerms = storedSearch
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -87,7 +92,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension ViewController: UISearchControllerDelegate, UISearchBarDelegate, UISearchResultsUpdating {
+extension ViewController: UISearchControllerDelegate, UISearchBarDelegate, UISearchResultsUpdating, SearchHistoryDelegate {
     func updateSearchResults(for searchController: UISearchController) {
         // Don't want to make an API call for every letter typed. So skipped using this method.
     }
@@ -121,6 +126,7 @@ extension ViewController: UISearchControllerDelegate, UISearchBarDelegate, UISea
                     } else {
                         self.updatingRecentSearch(text: search)
                     }
+                    self.persistSearch.setValue(self.searchTerms, forKeyPath: "SearchTerms")
                 } else {
                     self.showErrorAlert(errorTitle: "No Results Found", errorMessage: "Search word either doesn't have any results available or it's not a invalid search")
                 }
@@ -135,10 +141,25 @@ extension ViewController: UISearchControllerDelegate, UISearchBarDelegate, UISea
     }
     
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        if (searchTerms.count > 0) {
+            historyView = SearchHistoryTableView()
+            if let historyView = historyView {
+                historyView.searchDelegate = self
+                historyView.layer.frame = CGRect(x: 20, y: 65, width: 2*view.bounds.width/3 + 20, height: min(CGFloat(30*searchTerms.count + 16), view.bounds.height - view.safeAreaInsets.bottom))
+                historyView.layer.borderWidth = 1
+                historyView.layer.borderColor = UIColor.darkGray.cgColor
+                historyView.layer.cornerRadius = 0.5
+                self.moviesTableView.removeFromSuperview()
+                self.view.addSubview(historyView)
+                historyView.reloadData()
+            }
+        }
         return true
     }
     
     func handlingVCDisplay() {
+        historyView?.removeFromSuperview()
+        historyView = nil
         self.view.addSubview(moviesTableView)
         moviesTableView.scrollRectToVisible(.zero, animated: false)
     }
